@@ -10,17 +10,18 @@ import java.sql.SQLException;
 
 
 public class DBContext {
+     private final String serverName = "localhost";
+    private final String dbName = "swp123";
+    private final String portNumber = "1433";
+    private final String userID = "sa";
+    private final String password = "123";
 
-    public  Connection getConnection() throws Exception {
+    public Connection getConnection() throws Exception {
         String url = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";databaseName=" + dbName;
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         return DriverManager.getConnection(url, userID, password);
     }
-    private final String serverName = "localhost";
-    private final String dbName = "users";
-    private final String portNumber = "1433";
-    private final String userID = "sa";
-    private final String password = "123";
+   
 
     public void closeConnection(Connection conn, PreparedStatement ps, ResultSet rs) throws SQLException {
         if (rs != null && !rs.isClosed()) {
@@ -33,7 +34,19 @@ public class DBContext {
             conn.close();
         }
     }
-    
+    public static void main(String[] args) throws Exception {
+       try {
+            DBContext dbContext = new DBContext();
+            Connection conn = dbContext.getConnection();
+            if (conn != null) {
+                System.out.println("Connection successful");
+            } else {
+                System.out.println("Failed to connect");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
     
 }
