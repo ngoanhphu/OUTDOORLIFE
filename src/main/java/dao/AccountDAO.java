@@ -63,8 +63,7 @@ public class AccountDAO {
                     user.setPhoneNumber(rs.getString("phone_number"));
                     user.setPasswordHash(rs.getString("passwordHash"));
                     user.setAdmin(rs.getBoolean("isAdmin"));
-                    user.setUser(rs.getBoolean("isUser"));
-                    user.setStaff(rs.getBoolean("isStaff"));
+                    user.setOwner(rs.getBoolean("isOwner"));
                     accounts.add(user);
                 }
             }
